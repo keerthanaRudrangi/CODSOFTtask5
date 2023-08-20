@@ -1,0 +1,79 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Contact {
+    private String name;
+    private String phoneNumber;
+    private String emailAddress;
+
+    public Contact(String name, String phoneNumber, String emailAddress) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+    }
+
+    public String toString() {
+        return "Name: " + name + ", Phone Number: " + phoneNumber + ", Email Address: " + emailAddress;
+    }
+}
+
+class AddressBook {
+    private ArrayList<Contact> contacts = new ArrayList<>();
+    private Scanner scanner = new Scanner(System.in);
+
+    public void addContact() {
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter phone number: ");
+        String phoneNumber = scanner.nextLine();
+        System.out.print("Enter email address: ");
+        String emailAddress = scanner.nextLine();
+
+        Contact contact = new Contact(name, phoneNumber, emailAddress);
+        contacts.add(contact);
+        System.out.println("Contact added successfully.");
+    }
+
+    public void displayAllContacts() {
+        for (Contact contact : contacts) {
+            System.out.println(contact);
+        }
+    }
+
+    // Other methods like removeContact, searchContact, etc.
+
+    public void run() {
+        boolean running = true;
+        while (running) {
+            System.out.println("Address Book System");
+            System.out.println("1. Add Contact");
+            System.out.println("2. Display All Contacts");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            switch (choice) {
+                case 1:
+                    addContact();
+                    break;
+                case 2:
+                    displayAllContacts();
+                    break;
+                case 3:
+                    running = false;
+                    System.out.println("Exiting the application.");
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        }
+    }
+}
+
+public class MainDemo {
+    public static void main(String[] args) {
+        AddressBook addressBook = new AddressBook();
+        addressBook.run();
+    }
+}
